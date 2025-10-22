@@ -63,7 +63,7 @@ services:
       - db-data:/var/lib/postgresql/data
     # Dışarıdan bir veritabanı istemcisi ile bağlanmak için port yönlendirmesi yapar.
     ports:
-      - "54321:5432"
+      - "65432:5432"
     # Bu servisin bağlanacağı ağı belirtir.
     networks:
       - laravel
