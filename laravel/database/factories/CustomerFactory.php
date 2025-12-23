@@ -18,10 +18,10 @@ class CustomerFactory extends Factory
     {
         return [
             'name' => fake()->firstName(),
-            'surname' => fake()->lastName(), 
-            'birthYear' => fake()->numberBetween(1900, 2024), 
-            'gender' => fake()->randomElement(['Male', 'Female']), 
-            
+            'surname' => fake()->lastName(),
+            'birthYear' => fake()->numberBetween(1950, 2025),
+            'gender' => fake()->randomElement(['male', 'female']),
+            'address' => fake()->asciify('**********')
         ];
     }
 }

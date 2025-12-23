@@ -13,15 +13,8 @@ return new class extends Migration
     {
         Schema::create('meals', function (Blueprint $table) {
             $table->id();
-
-            // Foreign keys
-            $table->foreignId('customer_id');
-            $table->foreignId('food_id');
-
-            // Attributes
-            $table->string('mealtime');
-            $table->boolean('like')->default(false);
-
+            $table->integer('customer_id');
+            $table->integer('food_id');
             $table->timestamps();
         });
     }

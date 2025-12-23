@@ -13,17 +13,8 @@ return new class extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
-
-            // Foreign keys
-            $table->foreignId('customer_id');
-            $table->foreignId('exercise_id');
-
-            // Attributes
-            $table->integer('repetition');
-            $table->integer('calor');
-            $table->boolean('like')->default(false);
-            $table->integer('duration');
-
+            $table->integer('customer_id');
+            $table->integer('exercise_id');
             $table->timestamps();
         });
     }

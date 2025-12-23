@@ -1,33 +1,31 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PagesController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\MealController;
-use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\FoodController;
+use App\Http\Controllers\MealController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get("/hello",function(){
-    return "Hello World";
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::resource('customers', CustomerController::class);
+    Route::resource('activities', ActivityController::class);
+    Route::resource('exercises', ExerciseController::class);
+    Route::resource('foods', FoodController::class);
+    Route::resource('meals', MealController::class);
 });
 
-Route::get("/hello/{name}",function($name){
-    return $name . " selamlar.";
-});
-
-
-
-Route::get("/contact",[PagesController::class,"contact"]);
-
-
-
-Route::resource('customers', CustomerController::class);
-Route::resource('meals', MealController::class);
-Route::resource('exercises', ExerciseController::class);
-Route::resource('activities', ActivityController::class);
-Route::resource('foods', FoodController::class);
+require __DIR__.'/auth.php';

@@ -13,6 +13,11 @@ class CustomerController extends Controller
      */
     public function index()
     {
+
+        $customers = Customer::all();
+        return view('customers.list', compact('customers'));
+        /*
+
         $customer = Customer::where("id","1")->get();
         
         $customer[0]->update([
@@ -24,7 +29,7 @@ class CustomerController extends Controller
 
         // foreach döngüsü
 
-        /*
+        
         $customers = Customer::all();
 
         foreach($customers as  $customer){
@@ -38,12 +43,13 @@ class CustomerController extends Controller
      */
     public function create()
     {
+        /*
         Customer::create([
             "name" => "Serdar",
             "surname"=> "Balkı",
             "birthYear"=>2004,
             "gender" => "Male",
-            
+            "address" => "Istanbul, Turkey",
 
         ]);
 
@@ -52,8 +58,11 @@ class CustomerController extends Controller
             "surname" => "Doe",
             "birthYear"=> 1999,
             "gender"=> "Female",
-            
+            "address" => "London, UK",
         ]);
+        */
+
+        return view('customers.create');
     }
 
     /**
@@ -61,7 +70,16 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+          $customer = Customer::create([
+            'name' => $request->post('name'),
+            'surname' => $request->post('surname'),
+            'birthYear' => $request->post('birthYear'),
+            'gender' => $request->post('gender'),
+            'address' => $request->post('address')
+        ]);
+
+        // return view('customers.list');
+        return redirect()->route('customers.index');
     }
 
     /**
