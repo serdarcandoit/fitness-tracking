@@ -1,0 +1,29 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            Edit Customer
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-white">
+                    <h3>Edit Customer</h3>
+
+                    <form method="POST" action="{{ route('customers.update', $customer->id) }}">
+                        @csrf
+                        @method('PUT')
+                        Name: <input type="text" name="name" value="{{ $customer->name }}" style="color: black;" /><br />
+                        Surname: <input type="text" name="surname" value="{{ $customer->surname }}" style="color: black;" /><br />
+                        birthYear: <input type="text" name="birthYear" value="{{ $customer->birthYear }}" style="color: black;" /><br />
+                        Gender: <input type="text" name="gender" value="{{ $customer->gender }}" style="color: black;" /><br />
+                        Address: <input type="text" name="address" value="{{ $customer->address }}" style="color: black;" /><br />
+                        <br />
+                        <input type="submit" value="Update Customer" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>

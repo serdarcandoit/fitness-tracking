@@ -15,12 +15,12 @@ class CustomerController extends Controller
     {
 
         $customers = Customer::all();
-        return response()->json($customers);
+        //return response()->json($customers);
 
-        /*
+        
         return view('customers.list', compact('customers'));
         
-
+        /*
         $customer = Customer::where("id","1")->get();
         
         $customer[0]->update([
@@ -88,8 +88,8 @@ class CustomerController extends Controller
         ]);
 
         // return view('customers.list');
-        return response()->json($customer);
-        //return redirect()->route('customers.index');
+        //return response()->json($customer);
+        return redirect()->route('customers.index');
     }
 
     /**
@@ -105,11 +105,13 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        $customer->update([
-            "surname"=> "abc"
-        ]);
-
-        dd(Customer::all());
+        // $customer->update([
+        //     "surname"=> "abc"
+        // ]);
+        //
+        // dd(Customer::all());
+        
+        return view('customers.edit', compact('customer'));
     }
 
     /**
@@ -117,7 +119,9 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        $customer->update($request->post());
+
+        return redirect()->route('customers.index');
     }
 
     /**
@@ -125,6 +129,7 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+        return redirect()->route('customers.index');
     }
 }
